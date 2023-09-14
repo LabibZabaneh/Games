@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'grid.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +14,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
+        body: Grid()
     );
   }
 
