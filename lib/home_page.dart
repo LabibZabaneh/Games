@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
       values = [0,0,0,0,0,0,0,0,0];
       turn = true;
       displayText = "X to play";
+      winValues = [false,false,false,false,false,false,false,false,false];
     });
   }
 }

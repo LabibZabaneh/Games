@@ -24,7 +24,7 @@ class _GridState extends State<Grid> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          DisplayText(text: widget.displayText),
+          DisplayText(text: widget.displayText, gameOver: isGameOver(), draw: widget.draw),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(0), renderBox(1), renderBox(2)]),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(3), renderBox(4), renderBox(5)]),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(6), renderBox(7), renderBox(8)])
@@ -68,7 +68,11 @@ class _GridState extends State<Grid> {
   }
 
   void changeDisplayText(){
-    widget.displayText = widget.turn ? "X to play" : "O to play";
+    if (isGameOver()){
+      widget.displayText = widget.turn ? "O wins!" : "X wins!";
+    } else {
+      widget.displayText = widget.turn ? "X to play" : "O to play";
+    }
   }
 
   void checkGameOver(){
