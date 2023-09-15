@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<int> values = [0,0,0,0,0,0,0,0,0];
+  List<bool> winValues = [false,false,false,false,false,false,false,false,false];
   bool turn = true;
   String displayText = "X to play";
 
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
-        body: Grid(values: values, turn: turn, displayText: displayText,)
+        body: Grid(values: values, turn: turn, displayText: displayText, winValues: winValues)
     );
   }
 
