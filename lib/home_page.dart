@@ -32,10 +32,19 @@ class _HomePageState extends State<HomePage> {
           Text('Tic Tac Toe'),
           IconButton(
               icon: Icon(Icons.refresh),
-              onPressed: () {}
+              onPressed: () {
+                clear();
+              }
           )
         ],
       ),
     );
+  }
+
+  void clear(){
+    setState(() {
+      values = [0,0,0,0,0,0,0,0,0];
+      turn = true;
+    });
   }
 }
