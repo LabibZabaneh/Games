@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DisplayText extends StatelessWidget {
-  const DisplayText({super.key});
+  final String text;
+
+  const DisplayText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +12,7 @@ class DisplayText extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(20)
         ),
-        child: Text("X to play"),
+        child: Text(text),
         margin: EdgeInsets.symmetric(vertical: 30),
         padding: EdgeInsets.all(10)
     );

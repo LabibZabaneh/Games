@@ -11,13 +11,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<int> values = [0,0,0,0,0,0,0,0,0];
   bool turn = true;
+  String displayText = "X to play";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
-        body: Grid(values: values, turn: turn)
+        body: Grid(values: values, turn: turn, displayText: displayText,)
     );
   }
 
@@ -45,6 +46,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       values = [0,0,0,0,0,0,0,0,0];
       turn = true;
+      displayText = "X to play";
     });
   }
 }
