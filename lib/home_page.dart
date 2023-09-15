@@ -9,12 +9,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<int> values = [0,0,0,0,0,0,0,0,0];
+  bool turn = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
-        body: Grid()
+        body: Grid(values: values, turn: turn)
     );
   }
 
