@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class DisplayScore extends StatelessWidget {
   final String player;
-  final int score;
+  int score;
 
-  const DisplayScore({super.key, required this.player, required this.score});
+  DisplayScore({super.key, required this.player, required this.score});
 
   @override
   Widget build(BuildContext context) {

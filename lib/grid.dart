@@ -10,8 +10,12 @@ class Grid extends StatefulWidget {
   String displayText;
   bool gameOver = false;
   bool draw = false;
+  Function(bool) changeScore;
+  int Function(bool) getPlayerScore;
+  Function changeScoreTurn;
 
-  Grid({super.key, required this.values, required this.turn, required this.displayText, required this.winValues});
+  Grid({super.key, required this.values, required this.turn, required this.displayText, required this.winValues,
+    required this.changeScore, required this.changeScoreTurn, required this.getPlayerScore});
 
   @override
   State<Grid> createState() => _GridState();
@@ -28,9 +32,9 @@ class _GridState extends State<Grid> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const DisplayScore(player: "Player 1", score: 0),
+              DisplayScore(player: "Player 1", score: widget.getPlayerScore(true)),
               DisplayText(text: widget.displayText, gameOver: isGameOver(), draw: widget.draw),
-              const DisplayScore(player: "Player 2", score: 0)
+              DisplayScore(player: "Player 2", score: widget.getPlayerScore(false))
             ],
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(0), renderBox(1), renderBox(2)]),
@@ -46,6 +50,9 @@ class _GridState extends State<Grid> {
       widget.values[boxId] = widget.turn ? 1 : 2;
     }
     checkGameOver();
+    if (widget.gameOver){
+      widget.changeScoreTurn();
+    }
     changeTurn();
   }
 
@@ -76,10 +83,20 @@ class _GridState extends State<Grid> {
   }
 
   void changeDisplayText(){
-    if (isGameOver()){
-      widget.displayText = widget.draw ? "Draw!" :(widget.turn ? "O wins!" : "X wins!");
+    if (widget.gameOver){
+      if (widget.draw){
+        widget.displayText = "  Draw!  ";
+      } else if (widget.turn){
+        widget.displayText = " O Wins! ";
+        widget.changeScore(false);
+      } else {
+        widget.displayText = " X Wins! ";
+        widget.changeScore(true);
+      }
+    } else if (widget.turn){
+      widget.displayText = "X to play";
     } else {
-      widget.displayText = widget.turn ? "X to play" : "O to play";
+      widget.displayText = "O to play";
     }
   }
 

@@ -13,13 +13,17 @@ class _HomePageState extends State<HomePage> {
   List<bool> winValues = [false,false,false,false,false,false,false,false,false];
   bool turn = true;
   String displayText = "X to play";
+  int player1Score = 0;
+  int player2Score = 0;
+  bool scoreTurn = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
-        body: Grid(values: values, turn: turn, displayText: displayText, winValues: winValues)
+        body: Grid(values: values, turn: turn, displayText: displayText, winValues: winValues,
+          getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore)
     );
   }
 
@@ -50,5 +54,21 @@ class _HomePageState extends State<HomePage> {
       displayText = "X to play";
       winValues = [false,false,false,false,false,false,false,false,false];
     });
+  }
+
+  void changeScore(bool playerWon){
+    if (scoreTurn) {
+      playerWon ? player1Score++ : player2Score++;
+    } else {
+      playerWon ? player2Score++ : player1Score++;
+    }
+  }
+
+  int getPlayerScore(bool player){
+    return player ? player1Score : player2Score;
+  }
+
+  void changeScoreTurn(){
+    scoreTurn = !scoreTurn; // Which player to be X
   }
 }
