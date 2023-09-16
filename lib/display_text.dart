@@ -14,9 +14,9 @@ class DisplayText extends StatelessWidget {
           color: gameOver ? (draw ? Colors.amber.shade300 : Colors.green.shade300) : Colors.white,
           borderRadius: BorderRadius.circular(20)
         ),
-        child: Text(text),
-        margin: EdgeInsets.symmetric(vertical: 30),
-        padding: EdgeInsets.all(10)
+        margin: const EdgeInsets.symmetric(vertical: 30),
+        padding: const EdgeInsets.all(10),
+        child: Text(text)
     );
   }
 }

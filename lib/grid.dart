@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'box.dart';
 import 'display_text.dart';
+import 'score_keeping.dart';
 
 class Grid extends StatefulWidget {
   List<int> values;
@@ -24,7 +25,14 @@ class _GridState extends State<Grid> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          DisplayText(text: widget.displayText, gameOver: isGameOver(), draw: widget.draw),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const DisplayScore(player: "Player 1", score: 0),
+              DisplayText(text: widget.displayText, gameOver: isGameOver(), draw: widget.draw),
+              const DisplayScore(player: "Player 2", score: 0)
+            ],
+          ),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(0), renderBox(1), renderBox(2)]),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(3), renderBox(4), renderBox(5)]),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(6), renderBox(7), renderBox(8)])
