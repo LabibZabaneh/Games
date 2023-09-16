@@ -69,7 +69,7 @@ class _GridState extends State<Grid> {
 
   void changeDisplayText(){
     if (isGameOver()){
-      widget.displayText = widget.turn ? "O wins!" : "X wins!";
+      widget.displayText = widget.draw ? "Draw!" :(widget.turn ? "O wins!" : "X wins!");
     } else {
       widget.displayText = widget.turn ? "X to play" : "O to play";
     }
