@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'grid.dart';
+import 'login.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,13 +17,14 @@ class _HomePageState extends State<HomePage> {
   int player1Score = 0;
   int player2Score = 0;
   bool scoreTurn = false;
+  bool page = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
-        body: Grid(values: values, turn: turn, displayText: displayText, winValues: winValues,
+        body: page ? Login(clickMultiPlayer: clickMultiPlayer) : Grid(values: values, turn: turn, displayText: displayText, winValues: winValues,
           getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore)
     );
   }
@@ -62,6 +64,12 @@ class _HomePageState extends State<HomePage> {
     } else {
       playerWon ? player2Score++ : player1Score++;
     }
+  }
+
+  void clickMultiPlayer(){
+    setState(() {
+      page = true;
+    });
   }
 
   int getPlayerScore(bool player){
