@@ -109,6 +109,9 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       page = true;
       clear();
+      player1Score = 0;
+      player2Score = 0;
+      scoreTurn = false;
     });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'dart:async';
 import 'box.dart';
 import 'display_text.dart';
 import 'score_keeping.dart';
@@ -63,14 +64,14 @@ class _GridState extends State<Grid> {
     }
   }
 
-  void moveComputer(){
+  Future<void> moveComputer() async {
+    await Future.delayed(const Duration(milliseconds: 300));
     Random random = Random();
     bool available = false;
     while(!available){
       int randomNumber = random.nextInt(9);
       if (isEmpty(randomNumber)){
         setState(() {
-          print(randomNumber);
           move(randomNumber);
           available = true;
         });
