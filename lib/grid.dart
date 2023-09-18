@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'box.dart';
 import 'display_text.dart';
 import 'score_keeping.dart';
 
 class Grid extends StatefulWidget {
+  bool gameType;
   List<int> values;
   List<bool> winValues;
   bool turn;
@@ -14,7 +16,7 @@ class Grid extends StatefulWidget {
   int Function(bool) getPlayerScore;
   Function changeScoreTurn;
 
-  Grid({super.key, required this.values, required this.turn, required this.displayText, required this.winValues,
+  Grid({super.key, required this.gameType, required this.values, required this.turn, required this.displayText, required this.winValues,
     required this.changeScore, required this.changeScoreTurn, required this.getPlayerScore});
 
   @override
@@ -34,7 +36,7 @@ class _GridState extends State<Grid> {
             children: [
               DisplayScore(player: "Player 1", score: widget.getPlayerScore(true)),
               DisplayText(text: widget.displayText, gameOver: isGameOver(), draw: widget.draw),
-              DisplayScore(player: "Player 2", score: widget.getPlayerScore(false))
+              DisplayScore(player: widget.gameType ? "Computer" : "Player 2", score: widget.getPlayerScore(false))
             ],
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(0), renderBox(1), renderBox(2)]),
@@ -54,7 +56,27 @@ class _GridState extends State<Grid> {
       widget.changeScoreTurn();
     }
     changeTurn();
+    if (widget.gameType && !isGameOver()){
+      if (!widget.turn){
+        moveComputer();
+      }
+    }
   }
+
+  void moveComputer(){
+    Random random = Random();
+    bool available = false;
+    while(!available){
+      int randomNumber = random.nextInt(9);
+      if (isEmpty(randomNumber)){
+        setState(() {
+          print(randomNumber);
+          move(randomNumber);
+          available = true;
+        });
+      }
+    }
+}
 
   void changeTurn(){
     setState(() {

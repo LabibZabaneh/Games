@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  final VoidCallback clickMultiPlayer;
+  final Function(bool) clickGameType;
 
-  const Login({super.key, required this.clickMultiPlayer});
+  const Login({super.key, required this.clickGameType});
 
   @override
   State<Login> createState() => _LoginState();
@@ -31,7 +31,9 @@ class _LoginState extends State<Login> {
         MouseRegion(
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              widget.clickGameType(true);
+            },
             child: Container(
               margin: const EdgeInsets.only(top: 50),
               padding: const EdgeInsets.all(7),
@@ -47,7 +49,7 @@ class _LoginState extends State<Login> {
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
-              widget.clickMultiPlayer();
+              widget.clickGameType(false);
             },
             child: Container(
               margin: const EdgeInsets.only(top: 20),

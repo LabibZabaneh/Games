@@ -18,13 +18,14 @@ class _HomePageState extends State<HomePage> {
   int player2Score = 0;
   bool scoreTurn = false;
   bool page = true;
+  bool gameType = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
-        body: page ? Login(clickMultiPlayer: clickMultiPlayer) : Grid(values: values, turn: turn, displayText: displayText, winValues: winValues,
+        body: page ? Login(clickGameType: clickGameType,) : Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
           getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore)
     );
   }
@@ -89,9 +90,10 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void clickMultiPlayer(){
+  void clickGameType(bool gameType){
     setState(() {
       page = false;
+      this.gameType = gameType;
     });
   }
 
@@ -106,6 +108,7 @@ class _HomePageState extends State<HomePage> {
   void clickMenu(){
     setState(() {
       page = true;
+      clear();
     });
   }
 }
