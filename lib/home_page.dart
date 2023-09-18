@@ -36,17 +36,36 @@ class _HomePageState extends State<HomePage> {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-              onPressed: () {
+          MouseRegion(
+            cursor: page ? SystemMouseCursors.basic : SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () {
                 clickMenu();
               },
-              icon: Icon(Icons.menu)),
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: const BoxDecoration(
+                  color: Colors.transparent, // Set the background color to transparent
+                ),
+                child: const Icon(Icons.menu),
+              ),
+            ),
+          ),
           Text('Tic Tac Toe'),
-          IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: () {
+          MouseRegion(
+            cursor: page ? SystemMouseCursors.basic : SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () {
                 clear();
-              }
+              },
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: const BoxDecoration(
+                  color: Colors.transparent, // Set the background color to transparent
+                ),
+                child: const Icon(Icons.refresh),
+              ),
+            ),
           )
         ],
       ),
