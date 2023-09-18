@@ -36,7 +36,11 @@ class _HomePageState extends State<HomePage> {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(Icons.menu),
+          IconButton(
+              onPressed: () {
+                clickMenu();
+              },
+              icon: Icon(Icons.menu)),
           Text('Tic Tac Toe'),
           IconButton(
               icon: Icon(Icons.refresh),
@@ -68,7 +72,7 @@ class _HomePageState extends State<HomePage> {
 
   void clickMultiPlayer(){
     setState(() {
-      page = true;
+      page = false;
     });
   }
 
@@ -78,5 +82,11 @@ class _HomePageState extends State<HomePage> {
 
   void changeScoreTurn(){
     scoreTurn = !scoreTurn; // Which player to be X
+  }
+
+  void clickMenu(){
+    setState(() {
+      page = true;
+    });
   }
 }
