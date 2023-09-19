@@ -15,10 +15,11 @@ class Grid extends StatefulWidget {
   bool draw = false;
   Function(bool) changeScore;
   int Function(bool) getPlayerScore;
+  bool Function() getScoreTurn;
   Function changeScoreTurn;
 
   Grid({super.key, required this.gameType, required this.values, required this.turn, required this.displayText, required this.winValues,
-    required this.changeScore, required this.changeScoreTurn, required this.getPlayerScore});
+    required this.changeScore, required this.changeScoreTurn, required this.getPlayerScore, required this.getScoreTurn});
 
   @override
   State<Grid> createState() => _GridState();
@@ -28,6 +29,17 @@ class _GridState extends State<Grid> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.gameType && !isGameOver()){
+      if (widget.getScoreTurn()){
+        if (widget.turn){
+          moveComputer();
+        }
+      } else {
+        if (!widget.turn){
+          moveComputer();
+        }
+      }
+    }
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -57,11 +69,6 @@ class _GridState extends State<Grid> {
       widget.changeScoreTurn();
     }
     changeTurn();
-    if (widget.gameType && !isGameOver()){
-      if (!widget.turn){
-        moveComputer();
-      }
-    }
   }
 
   Future<void> moveComputer() async {
