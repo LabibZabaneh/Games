@@ -29,17 +29,7 @@ class _GridState extends State<Grid> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.gameType && !isGameOver()){
-      if (widget.getScoreTurn()){
-        if (widget.turn){
-          moveComputer();
-        }
-      } else {
-        if (!widget.turn){
-          moveComputer();
-        }
-      }
-    }
+    computerToPlay();
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -64,11 +54,25 @@ class _GridState extends State<Grid> {
     if (widget.values[boxId] == 0){ // if the box is empty
       widget.values[boxId] = widget.turn ? 1 : 2;
     }
-    checkGameOver();
+    checkGameOver(widget.values);
     if (widget.gameOver){
       widget.changeScoreTurn();
     }
     changeTurn();
+  }
+
+  void computerToPlay(){
+    if (widget.gameType && !isGameOver()){
+      if (widget.getScoreTurn()){
+        if (widget.turn){
+          moveComputer();
+        }
+      } else {
+        if (!widget.turn){
+          moveComputer();
+        }
+      }
+    }
   }
 
   Future<void> moveComputer() async {
@@ -77,27 +81,20 @@ class _GridState extends State<Grid> {
     bool available = false;
     while(!available){
       int randomNumber = random.nextInt(9);
-      if (isEmpty(randomNumber)){
+      if (isEmpty( widget.values, randomNumber)){
         setState(() {
           move(randomNumber);
           available = true;
         });
       }
     }
-}
+  }
 
   void changeTurn(){
     setState(() {
       widget.turn = !widget.turn;
       changeDisplayText();
     });
-  }
-
-  bool isEmpty(int boxId){
-    if (widget.values[boxId] == 0){
-      return true;
-    }
-    return false;
   }
 
   bool getValue(int boxId){
@@ -109,7 +106,7 @@ class _GridState extends State<Grid> {
 
   Widget renderBox(int boxId){
     return Box(boxId: boxId, move: move, value: getValue(boxId),
-      isEmpty: isEmpty(boxId), win: getWinValues(boxId), gameOver: isGameOver(),);
+      isEmpty: isEmpty(widget.values, boxId), win: getWinValues(boxId), gameOver: isGameOver());
   }
 
   void changeDisplayText(){
@@ -130,7 +127,7 @@ class _GridState extends State<Grid> {
     }
   }
 
-  void checkGameOver(){
+  bool checkGameOver(List<int> values){
     if (checkRow(0)){
       setWinValues(0, 1, 2);
       widget.gameOver = true;
@@ -155,10 +152,13 @@ class _GridState extends State<Grid> {
     } else if (checkDiagonal(2)){
       widget.gameOver = true;
       setWinValues(2, 4, 6);
-    } else if (checkDraw()){
+    } else if (checkDraw(widget.values)){
       widget.gameOver = true;
       widget.draw = true;
+    } else {
+      return false;
     }
+    return true;
   }
 
   bool isGameOver(){
@@ -201,15 +201,6 @@ class _GridState extends State<Grid> {
     return false;
   }
 
-  bool checkDraw(){
-    for (int i=0;i<9;i++){
-      if (widget.values[i] == 0){
-        return false;
-      }
-    }
-    return true;
-  }
-
   void setWinValues(int i, int j, int z){
     widget.winValues[i] = true;
     widget.winValues[j] = true;
@@ -218,5 +209,32 @@ class _GridState extends State<Grid> {
 
   bool getWinValues(int i){
     return widget.winValues[i];
+  }
+
+
+
+  bool isEmpty(List<int> values, int boxId){
+    if (widget.values[boxId] == 0){
+      return true;
+    }
+    return false;
+  }
+
+  bool checkDraw(List<int> values){
+    for (int i=0;i<9;i++){
+      if (values[i] == 0){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  Future<void> moveComputer2() async {
+    await Future.delayed(const Duration(milliseconds: 300));
+    for (int i=0;i<9;i++){
+      if (isEmpty(widget.values, i)){
+
+      }
+    }
   }
 }

@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
         body: page ? Login(clickGameType: clickGameType,) : Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
-          getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn,)
+          getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn)
     );
   }
 

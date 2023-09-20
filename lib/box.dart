@@ -8,6 +8,7 @@ class Box extends StatelessWidget {
   final bool win;
   final Function(int) move;
 
+
   const Box({super.key, required this.boxId, required this.move, required this.value,
     required this.isEmpty, required this.gameOver, required this.win});
 
