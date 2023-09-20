@@ -1,9 +1,9 @@
 class Computer {
 
-  static bool doesMoveWin(List<int> gameValues, int boxValue, int boxId){
+  static bool doesMoveWin(List<int> values, int boxValue, int boxId){
+    List<int> gameValues = List.from(values);
     gameValues[boxId] = boxValue;
     List<List<int>> game = convert2d(gameValues);
-    print(game);
 
     int result = calculateGameResult(game);
 
@@ -49,7 +49,7 @@ class Computer {
 
   static List<List<int>> convert2d(List<int> values){
     List<List<int>> game = [];
-    for (int i=0;i<9;i+3){
+    for (int i=0;i<9;i+=3){
       List<int> temp = [values[i],values[i+1], values[i+2]];
       game.add(temp);
     }

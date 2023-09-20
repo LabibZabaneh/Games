@@ -30,7 +30,7 @@ class _GridState extends State<Grid> {
 
   @override
   Widget build(BuildContext context) {
-    //Computer.doesMoveWin(widget.values, 1, 0);
+    print(Computer.doesMoveWin(widget.values, 1, 0));
     computerToPlay();
     return Container(
       child: Column(
