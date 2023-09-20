@@ -4,6 +4,7 @@ import 'dart:async';
 import 'box.dart';
 import 'display_text.dart';
 import 'score_keeping.dart';
+import 'computer.dart';
 
 class Grid extends StatefulWidget {
   bool gameType;
@@ -29,6 +30,7 @@ class _GridState extends State<Grid> {
 
   @override
   Widget build(BuildContext context) {
+    //Computer.doesMoveWin(widget.values, 1, 0);
     computerToPlay();
     return Container(
       child: Column(
@@ -210,8 +212,6 @@ class _GridState extends State<Grid> {
   bool getWinValues(int i){
     return widget.winValues[i];
   }
-
-
 
   bool isEmpty(List<int> values, int boxId){
     if (widget.values[boxId] == 0){
