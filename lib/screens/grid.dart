@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
-import 'box.dart';
-import 'display_text.dart';
-import 'score_keeping.dart';
-import 'computer.dart';
+import '../widgets/box.dart';
+import '../widgets/display_text.dart';
+import '../widgets/score_keeping.dart';
+import '../utility/computer.dart';
 
 class Grid extends StatefulWidget {
   bool gameType;
@@ -79,7 +79,9 @@ class _GridState extends State<Grid> {
   Future<void> moveComputer() async {
     await Future.delayed(const Duration(milliseconds: 300));
     if (!makeComputerMove(widget.turn)){
+      print("didn't make first");
       if (!makeComputerMove(!widget.turn)){
+        print("didn't make second");
         makeRandomComputerMove();
       }
     }
@@ -101,6 +103,7 @@ class _GridState extends State<Grid> {
     while(!available){
       int randomNumber = random.nextInt(9);
       if (isEmpty( widget.values, randomNumber)){
+        print("made random");
         setState(() {
           move(randomNumber);
           available = true;

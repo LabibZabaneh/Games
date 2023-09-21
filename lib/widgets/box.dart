@@ -16,7 +16,7 @@ class Box extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (!gameOver){
+        if (!gameOver && isEmpty){
           move(boxId);
         }
       },

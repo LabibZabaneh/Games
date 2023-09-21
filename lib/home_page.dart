@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'grid.dart';
-import 'login.dart';
+import 'screens/grid.dart';
+import 'screens/login.dart';
+import 'screens/difficulty.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,14 +20,17 @@ class _HomePageState extends State<HomePage> {
   bool scoreTurn = false;
   bool page = true;
   bool gameType = false;
+  bool loginPage = true;
+  bool difficultyPage = false;
+  bool gamePage = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
-        body: page ? Login(clickGameType: clickGameType,) : Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
-          getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn)
+        body: loginPage ? Login(clickGameType: clickGameType) : (difficultyPage ? Difficulty(clickDifficultyLevel: clickDifficultyLevel,) : (gamePage ? Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
+            getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn) : null))
     );
   }
 
@@ -90,9 +94,24 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void clickDifficultyLevel(int i){
+    setState(() {
+      loginPage = false;
+      difficultyPage = false;
+      gamePage = true;
+    });
+  }
+
+
   void clickGameType(bool gameType){
     setState(() {
-      page = false;
+      loginPage = false;
+      if (gameType){
+        difficultyPage = true;
+      } else {
+        gamePage = true;
+      }
+      gameType ? this.difficultyPage = true : this.difficultyPage = false;
       this.gameType = gameType;
     });
   }
@@ -111,7 +130,7 @@ class _HomePageState extends State<HomePage> {
 
   void clickMenu(){
     setState(() {
-      page = true;
+      loginPage = true;
       clear();
       player1Score = 0;
       player2Score = 0;

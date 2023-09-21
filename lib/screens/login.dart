@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
-              // widget.clickGameType(false);
+              widget.clickGameType(false);
             },
             child: Container(
               margin: const EdgeInsets.only(top: 20),
