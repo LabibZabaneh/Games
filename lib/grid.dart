@@ -30,7 +30,6 @@ class _GridState extends State<Grid> {
 
   @override
   Widget build(BuildContext context) {
-    print(Computer.doesMoveWin(widget.values, 1, 0));
     computerToPlay();
     return Container(
       child: Column(
@@ -79,6 +78,24 @@ class _GridState extends State<Grid> {
 
   Future<void> moveComputer() async {
     await Future.delayed(const Duration(milliseconds: 300));
+    if (!makeComputerMove(widget.turn)){
+      if (!makeComputerMove(!widget.turn)){
+        makeRandomComputerMove();
+      }
+    }
+  }
+
+  bool makeComputerMove(bool turn){
+    for (int i=0;i<9;i++){
+      if (Computer.doesMoveWin(widget.values, turn ? 1 : 2, i) && isEmpty(widget.values, i)){
+        move(i);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void makeRandomComputerMove(){
     Random random = Random();
     bool available = false;
     while(!available){
