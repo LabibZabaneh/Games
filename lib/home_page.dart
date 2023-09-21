@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   bool loginPage = true;
   bool difficultyPage = false;
   bool gamePage = false;
+  int difficulty = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
         body: loginPage ? Login(clickGameType: clickGameType) : (difficultyPage ? Difficulty(clickDifficultyLevel: clickDifficultyLevel,) : (gamePage ? Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
-            getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn) : null))
+            getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty,) : null))
     );
   }
 
@@ -99,6 +100,7 @@ class _HomePageState extends State<HomePage> {
       loginPage = false;
       difficultyPage = false;
       gamePage = true;
+      difficulty = i;
     });
   }
 

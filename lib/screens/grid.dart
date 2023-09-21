@@ -12,15 +12,16 @@ class Grid extends StatefulWidget {
   List<bool> winValues;
   bool turn;
   String displayText;
-  bool gameOver = false;
-  bool draw = false;
   Function(bool) changeScore;
   int Function(bool) getPlayerScore;
   bool Function() getScoreTurn;
   Function changeScoreTurn;
+  int difficulty;
+  bool gameOver = false;
+  bool draw = false;
 
   Grid({super.key, required this.gameType, required this.values, required this.turn, required this.displayText, required this.winValues,
-    required this.changeScore, required this.changeScoreTurn, required this.getPlayerScore, required this.getScoreTurn});
+    required this.changeScore, required this.changeScoreTurn, required this.getPlayerScore, required this.getScoreTurn, required this.difficulty});
 
   @override
   State<Grid> createState() => _GridState();
@@ -78,18 +79,12 @@ class _GridState extends State<Grid> {
 
   Future<void> moveComputer() async {
     await Future.delayed(const Duration(milliseconds: 300));
-    if (!makeComputerMove(widget.turn)){
-      print("didn't make first");
-      if (!makeComputerMove(!widget.turn)){
-        print("didn't make second");
-        makeRandomComputerMove();
-      }
-    }
+    makeComputerMove(widget.turn) ? null : (makeComputerMove(!widget.turn) ? null : makeRandomComputerMove());
   }
 
   bool makeComputerMove(bool turn){
     for (int i=0;i<9;i++){
-      if (Computer.doesMoveWin(widget.values, turn ? 1 : 2, i) && isEmpty(widget.values, i)){
+      if (Computer.doesMoveWin(widget.values, turn ? 1 : 2, i) && isEmpty(widget.values, i) && widget.difficulty > 1){
         move(i);
         return true;
       }
@@ -103,7 +98,6 @@ class _GridState extends State<Grid> {
     while(!available){
       int randomNumber = random.nextInt(9);
       if (isEmpty( widget.values, randomNumber)){
-        print("made random");
         setState(() {
           move(randomNumber);
           available = true;
