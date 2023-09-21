@@ -1,16 +1,25 @@
-# games
+# Tic Tac Toe Game
 
-A new Flutter project.
+This is a simple Tic Tac Toe game built using Flutter.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Single Player and Multiplayer Modes:** Choose between playing against the computer or with a friend.
+- **Adjustable Difficulty Levels:** In single-player mode, you can select from three difficulty levels: Easy, Medium, and Hard.
+- **Clean and Intuitive User Interface:** The app provides a seamless and enjoyable user experience.
 
-A few resources to get you started if this is your first Flutter project:
+## How to Run
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Follow these steps to run the app on your local machine:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone this repository: `git clone https://github.com/LabibZabaneh/Games.git`
+2. Navigate to the project directory: `cd tic-tac-toe`
+3. Install dependencies: `flutter pub get`
+4. Run the app: `flutter run`
+
+## Usage
+
+- Launch the app and choose between single-player and multi-player modes.
+- In single-player mode, select the difficulty level before starting the game.
+- Make your moves by tapping on the grid cells.
+- The app will indicate the winner or a draw.
