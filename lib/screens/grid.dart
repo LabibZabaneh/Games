@@ -79,14 +79,47 @@ class _GridState extends State<Grid> {
 
   Future<void> moveComputer() async {
     await Future.delayed(const Duration(milliseconds: 300));
-    makeComputerMove(widget.turn) ? null : (makeComputerMove(!widget.turn) ? null : makeRandomComputerMove());
+    // check if computer can win, then if opponent can win, then if center empty, then if side empty then random
+    makeComputerMove(widget.turn) ? null : (makeComputerMove(!widget.turn) ? null : (centerMove(widget.values, widget.turn ? 1 : 2) ? null : (sideMove(widget.values, widget.turn ? 1 : 2) ? null : makeRandomComputerMove())));
   }
 
   bool makeComputerMove(bool turn){
-    for (int i=0;i<9;i++){
-      if (Computer.doesMoveWin(widget.values, turn ? 1 : 2, i) && isEmpty(widget.values, i) && widget.difficulty > 1){
-        move(i);
-        return true;
+    if (widget.difficulty > 1){
+      for (int i=0;i<9;i++){
+        if (Computer.doesMoveWin(widget.values, turn ? 1 : 2, i) && isEmpty(widget.values, i)){
+          move(i);
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool centerMove(List<int> values, int boxValue){
+    if (widget.difficulty == 3){
+      if (boxValue == 2){
+        if (values[4] == 0){
+          move(4);
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool sideMove(List<int> values, int boxValue){
+    if (widget.difficulty == 3){
+      bool found = false;
+      if (boxValue == 2){
+        while (!found){
+          List<int> options = [1, 3, 5, 7];
+          Random random = Random();
+          int result = options[random.nextInt(options.length)];
+          if (values[result] == 0){
+            move(result);
+            return true;
+          }
+        }
       }
     }
     return false;
@@ -95,7 +128,7 @@ class _GridState extends State<Grid> {
   void makeRandomComputerMove(){
     Random random = Random();
     bool available = false;
-    while(!available){
+    while (!available){
       int randomNumber = random.nextInt(9);
       if (isEmpty( widget.values, randomNumber)){
         setState(() {
