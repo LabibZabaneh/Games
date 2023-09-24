@@ -21,7 +21,8 @@ class _HomePageState extends State<HomePage> {
   bool scoreTurn = false;
   bool page = true;
   bool gameType = false;
-  bool loginPage = true;
+  bool gameSelectionPage = true;
+  bool loginPage = false;
   bool difficultyPage = false;
   bool gamePage = false;
   int difficulty = 0;
@@ -31,8 +32,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
-        body: GameSelectionPage()// loginPage ? Login(clickGameType: clickGameType) : (difficultyPage ? Difficulty(clickDifficultyLevel: clickDifficultyLevel,) : (gamePage ? Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
-            //getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty,) : null))
+        body: gameSelectionPage ? GameSelectionPage(clicked : clickGame) : (loginPage ? Login(clickGameType: clickGameType) : (difficultyPage ? Difficulty(clickDifficultyLevel: clickDifficultyLevel,) : (gamePage ? Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
+            getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty,) : null)))
     );
   }
 
@@ -88,6 +89,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void clickGame(){
+    setState(() {
+
+    });
+    gameSelectionPage = false;
+    loginPage = true;
+  }
+
   void changeScore(bool playerWon){
     if (scoreTurn) {
       playerWon ? player1Score++ : player2Score++;
@@ -133,7 +142,7 @@ class _HomePageState extends State<HomePage> {
 
   void clickMenu(){
     setState(() {
-      loginPage = true;
+      gameSelectionPage = true;
       clear();
       player1Score = 0;
       player2Score = 0;

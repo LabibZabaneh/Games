@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class GameSelectionPage extends StatefulWidget {
-  const GameSelectionPage({super.key});
+  final Function() clicked;
+
+  const GameSelectionPage({super.key, required this.clicked});
 
   @override
   State<GameSelectionPage> createState() => _GameSelectionPageState();
@@ -15,7 +17,7 @@ class _GameSelectionPageState extends State<GameSelectionPage> {
         Align(
             alignment: Alignment.center,
             child: Container(
-                margin: EdgeInsets.symmetric(vertical: 20),
+                margin: EdgeInsets.symmetric(vertical: 40),
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -31,16 +33,22 @@ class _GameSelectionPageState extends State<GameSelectionPage> {
   }
 
   Widget option(String text){
-    return Container(
-        width: 92,
-        alignment: Alignment.center,
-        margin: EdgeInsets.symmetric(vertical: 5),
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20)
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+            width: 92,
+            alignment: Alignment.center,
+            margin: EdgeInsets.symmetric(vertical: 10),
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20)
+            ),
+            child: Text(text)
         ),
-        child: Text(text)
+      ),
     );
   }
 }
