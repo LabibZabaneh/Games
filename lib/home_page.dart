@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'screens/game_selection.dart';
 import 'screens/grid.dart';
-import 'screens/login.dart';
+import 'screens/game_mode_selection.dart';
 import 'screens/difficulty.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,8 +31,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
-        body: loginPage ? Login(clickGameType: clickGameType) : (difficultyPage ? Difficulty(clickDifficultyLevel: clickDifficultyLevel,) : (gamePage ? Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
-            getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty,) : null))
+        body: GameSelectionPage()// loginPage ? Login(clickGameType: clickGameType) : (difficultyPage ? Difficulty(clickDifficultyLevel: clickDifficultyLevel,) : (gamePage ? Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
+            //getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty,) : null))
     );
   }
 
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Text('Tic Tac Toe'),
+          Text('Games'),
           MouseRegion(
             cursor: page ? SystemMouseCursors.basic : SystemMouseCursors.click,
             child: GestureDetector(

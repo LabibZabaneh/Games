@@ -104,7 +104,7 @@ class _GridState extends State<Grid> {
         }
       }
     }
-    return false;
+    return false; 
   }
 
   bool sideMove(List<int> values, int boxValue){
