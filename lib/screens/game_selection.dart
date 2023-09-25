@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GameSelectionPage extends StatefulWidget {
-  final Function() clicked;
+  final Function(bool) clicked;
 
   const GameSelectionPage({super.key, required this.clicked});
 
@@ -26,17 +26,19 @@ class _GameSelectionPageState extends State<GameSelectionPage> {
                 child: Text("Choose a Game", style: TextStyle(fontSize: 17),)
             )
         ),
-        option("Tic Tac Toe"),
-        option("Connect 4")
+        option("Tic Tac Toe", true),
+        option("Connect 4", false)
       ],
     );
   }
 
-  Widget option(String text){
+  Widget option(String text, bool option){
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          widget.clicked(option);
+        },
         child: Container(
             width: 92,
             alignment: Alignment.center,

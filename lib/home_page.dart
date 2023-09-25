@@ -89,12 +89,13 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void clickGame(){
-    setState(() {
-
-    });
-    gameSelectionPage = false;
-    loginPage = true;
+  void clickGame(bool option){
+    if (option){
+      setState(() {
+        gameSelectionPage = false;
+        loginPage = true;
+      });
+    }
   }
 
   void changeScore(bool playerWon){
