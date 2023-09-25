@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
-import '../widgets/box.dart';
-import '../widgets/display_text.dart';
-import '../widgets/score_keeping.dart';
-import '../utility/computer.dart';
+import '../../widgets/box.dart';
+import '../../widgets/display_text.dart';
+import '../../widgets/score_keeping.dart';
+import '../../utility/computer.dart';
 
 class Grid extends StatefulWidget {
   bool gameType;
@@ -32,23 +32,21 @@ class _GridState extends State<Grid> {
   @override
   Widget build(BuildContext context) {
     computerToPlay();
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              DisplayScore(player: "Player 1", score: widget.getPlayerScore(true)),
-              DisplayText(text: widget.displayText, gameOver: isGameOver(), draw: widget.draw),
-              DisplayScore(player: widget.gameType ? "Computer" : "Player 2", score: widget.getPlayerScore(false))
-            ],
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(0), renderBox(1), renderBox(2)]),
-          Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(3), renderBox(4), renderBox(5)]),
-          Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(6), renderBox(7), renderBox(8)])
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            DisplayScore(player: "Player 1", score: widget.getPlayerScore(true)),
+            DisplayText(text: widget.displayText, gameOver: isGameOver(), draw: widget.draw),
+            DisplayScore(player: widget.gameType ? "Computer" : "Player 2", score: widget.getPlayerScore(false))
           ],
-      ),
+        ),
+        Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(0), renderBox(1), renderBox(2)]),
+        Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(3), renderBox(4), renderBox(5)]),
+        Row(mainAxisAlignment: MainAxisAlignment.center,children: [renderBox(6), renderBox(7), renderBox(8)])
+        ],
     );
   }
 

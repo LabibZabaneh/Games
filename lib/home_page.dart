@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:games/screens/connect4/connect4Grid.dart';
 import 'screens/game_selection.dart';
-import 'screens/grid.dart';
-import 'screens/game_mode_selection.dart';
-import 'screens/difficulty.dart';
+import 'screens/tictactoe/grid.dart';
+import 'screens/tictactoe/game_mode_selection.dart';
+import 'screens/tictactoe/difficulty.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
         body: gameSelectionPage ? GameSelectionPage(clicked : clickGame) : (loginPage ? Login(clickGameType: clickGameType) : (difficultyPage ? Difficulty(clickDifficultyLevel: clickDifficultyLevel,) : (gamePage ? Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
-            getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty,) : null)))
+          getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty,) : null)))
     );
   }
 

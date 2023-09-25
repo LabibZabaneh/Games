@@ -17,13 +17,13 @@ class _GameSelectionPageState extends State<GameSelectionPage> {
         Align(
             alignment: Alignment.center,
             child: Container(
-                margin: EdgeInsets.symmetric(vertical: 40),
-                padding: EdgeInsets.all(20),
+                margin: const EdgeInsets.symmetric(vertical: 40),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20)
                 ),
-                child: Text("Choose a Game", style: TextStyle(fontSize: 17),)
+                child: const Text("Choose a Game", style: TextStyle(fontSize: 17),)
             )
         ),
         option("Tic Tac Toe", true),
@@ -42,8 +42,8 @@ class _GameSelectionPageState extends State<GameSelectionPage> {
         child: Container(
             width: 92,
             alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(vertical: 10),
-            padding: EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20)
