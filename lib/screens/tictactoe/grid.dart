@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
-import '../../widgets/box.dart';
+import '../../widgets/tictactoeBox.dart';
 import '../../widgets/display_text.dart';
 import '../../widgets/score_keeping.dart';
 import '../../utility/computer.dart';
@@ -152,7 +152,7 @@ class _GridState extends State<Grid> {
   }
 
   Widget renderBox(int boxId){
-    return Box(boxId: boxId, move: move, value: getValue(boxId),
+    return TicTacToeBox(boxId: boxId, move: move, value: getValue(boxId),
       isEmpty: isEmpty(widget.values, boxId), win: getWinValues(boxId), gameOver: isGameOver());
   }
 

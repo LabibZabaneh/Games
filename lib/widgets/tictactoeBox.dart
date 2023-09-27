@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Box extends StatelessWidget {
+class TicTacToeBox extends StatelessWidget {
   final int boxId;
   final bool isEmpty;
   final bool value; // either X or O
@@ -9,7 +9,7 @@ class Box extends StatelessWidget {
   final Function(int) move;
 
 
-  const Box({super.key, required this.boxId, required this.move, required this.value,
+  const TicTacToeBox({super.key, required this.boxId, required this.move, required this.value,
     required this.isEmpty, required this.gameOver, required this.win});
 
   @override

@@ -44,7 +44,6 @@ class Connect4Grid extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(100)
       ),
-      child: Text(' '),
     );
   }
 }

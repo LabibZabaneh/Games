@@ -27,14 +27,14 @@ class _HomePageState extends State<HomePage> {
   bool difficultyPage = false;
   bool gamePage = false;
   int difficulty = 0;
+  Map<String, bool> pages = {"startPage" : true, "tictactoeModePage" : false, "tictactoeDifficultyPage" : false, "tictactoeGamePage" : false, "connect4GamePage" : false};
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.red.shade400,
         appBar: Dashboard(),
-        body: gameSelectionPage ? GameSelectionPage(clicked : clickGame) : (loginPage ? Login(clickGameType: clickGameType) : (difficultyPage ? Difficulty(clickDifficultyLevel: clickDifficultyLevel,) : (gamePage ? Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
-          getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty,) : null)))
+        body: getCurrentPage()
     );
   }
 
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Text('Games'),
+          const Text('Games'),
           MouseRegion(
             cursor: page ? SystemMouseCursors.basic : SystemMouseCursors.click,
             child: GestureDetector(
@@ -79,6 +79,54 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  Widget getCurrentPage() {
+    String currentPage = getCurrentPageName(pages);
+    if (currentPage != "error") {
+      for (var entry in pages.entries) {
+        if (entry.value) {
+          return getWidgetByName(entry.key);
+        }
+      }
+    }
+    return Container();
+  }
+
+  Widget getWidgetByName(String name){
+    if (name == "startPage"){
+      return GameSelectionPage(changePage: changePage);
+    } else if (name == "tictactoeModePage"){
+      return Login(clickGameType: clickGameType);
+    } else if (name == "tictactoeDifficultyPage"){
+      return Difficulty(clickDifficultyLevel: clickDifficultyLevel);
+    } else if (name == "tictactoeGamePage"){
+      return Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
+          getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty);
+    } else if (name == "connect4GamePage"){
+      return const Connect4Grid();
+    } else{
+      return Container();
+    }
+  }
+
+  void changePage(String targetPageName){
+    setState(() {
+      String currentPage = getCurrentPageName(pages);
+      if (currentPage != "error"){
+        pages[currentPage] = false;
+        pages[targetPageName] = true;
+      }
+    });
+  }
+
+  String getCurrentPageName(Map<String, bool> pages) {
+    for (var page in pages.entries) {
+      if (page.value) {
+        return page.key;
+      }
+    }
+    return 'error';
   }
 
   void clear(){
@@ -108,26 +156,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   void clickDifficultyLevel(int i){
-    setState(() {
-      loginPage = false;
-      difficultyPage = false;
-      gamePage = true;
-      difficulty = i;
-    });
+    difficulty = i;
+    changePage("tictactoeGamePage");
   }
 
 
   void clickGameType(bool gameType){
-    setState(() {
-      loginPage = false;
-      if (gameType){
-        difficultyPage = true;
-      } else {
-        gamePage = true;
-      }
-      gameType ? this.difficultyPage = true : this.difficultyPage = false;
-      this.gameType = gameType;
-    });
+    this.gameType = gameType;
+    if (gameType){
+      changePage("tictactoeDifficultyPage");
+    } else {
+      changePage("tictactoeGamePage");
+    }
   }
 
   int getPlayerScore(bool player){
