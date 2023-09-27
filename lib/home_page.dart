@@ -183,12 +183,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void clickMenu(){
-    setState(() {
-      gameSelectionPage = true;
-      clear();
-      player1Score = 0;
-      player2Score = 0;
-      scoreTurn = false;
-    });
+    changePage("startPage");
+    scoreTurn = false;
+    clear();
+
   }
 }
