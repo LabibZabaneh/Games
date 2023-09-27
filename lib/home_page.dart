@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MouseRegion(
-            cursor: page ? SystemMouseCursors.basic : SystemMouseCursors.click,
+            cursor: getCurrentPageName(pages) == "startPage" ? SystemMouseCursors.basic : SystemMouseCursors.click,
             child: GestureDetector(
               onTap: () {
                 clickMenu();
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const Text('Games'),
           MouseRegion(
-            cursor: page ? SystemMouseCursors.basic : SystemMouseCursors.click,
+            cursor: (getCurrentPageName(pages) == "tictactoeGamePage") || (getCurrentPageName(pages) == "connect4GamePage")  ? SystemMouseCursors.click : SystemMouseCursors.basic,
             child: GestureDetector(
               onTap: () {
                 clear();
