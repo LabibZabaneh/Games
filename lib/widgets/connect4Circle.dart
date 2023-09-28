@@ -3,19 +3,16 @@ import 'package:flutter/material.dart';
 class Connect4Circle extends StatelessWidget {
   final bool isEmpty;
   final bool value;
-  final int row;
   final int column;
-  final Function(int row, int column) move;
+  final Function(int column) move;
 
-  Connect4Circle({super.key, required this.row, required this.column, required this.move,required this.isEmpty, required this.value});
+  Connect4Circle({super.key, required this.column, required this.move,required this.isEmpty, required this.value});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (isEmpty){
-          move(row, column);
-        }
+        move(column);
       },
       child: Container(
         width: 45,
