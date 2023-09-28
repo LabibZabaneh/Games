@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
       return Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
           getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty);
     } else if (name == "connect4GamePage"){
-      return const Connect4Grid();
+      return Connect4Grid();
     } else{
       return Container();
     }
