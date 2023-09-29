@@ -3,6 +3,7 @@ import 'package:games/widgets/display_text.dart';
 import 'package:games/widgets/score_keeping.dart';
 import 'package:games/widgets/connect4Circle.dart';
 import 'package:games/widgets/display_text.dart';
+import 'package:games/utility/connect4_utility.dart';
 
 class Connect4Grid extends StatefulWidget {
   List<List<int>> values = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
@@ -62,6 +63,9 @@ class _Connect4GridState extends State<Connect4Grid> {
           changeTurn();
           break;
         }
+      }
+      if (Connect4Utility.checkGameOver(widget.values).isNotEmpty){
+        print("GameOver");
       }
     });
   }
