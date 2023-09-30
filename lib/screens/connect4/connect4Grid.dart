@@ -52,7 +52,7 @@ class _Connect4GridState extends State<Connect4Grid> {
   }
 
   Widget renderCircle(int row, int column){
-    return Connect4Circle(column: column, move: move,isEmpty: isEmpty(row, column), value: getValue(row, column));
+    return Connect4Circle(column: column, move: move, value: getValue(row, column));
   }
 
   void move(int column){
@@ -64,10 +64,20 @@ class _Connect4GridState extends State<Connect4Grid> {
           break;
         }
       }
-      if (Connect4Utility.checkGameOver(widget.values).isNotEmpty){
+      List<List<int>> winValues = Connect4Utility.checkGameOver(widget.values);
+      if (winValues.isNotEmpty){
+        setWinValues(winValues);
         print("GameOver");
       }
     });
+  }
+
+  void setWinValues(List<List<int>> winValues){
+    for (int i=0;i<winValues.length;i++){
+      int row = winValues[i][0];
+      int column = winValues[i][1];
+      widget.values[row][column] = 3;
+    }
   }
 
   void changeTurn(){
@@ -83,11 +93,7 @@ class _Connect4GridState extends State<Connect4Grid> {
     }
   }
 
-  bool isEmpty(int row, int column){
-    return widget.values[row][column] == 0 ? true : false;
-  }
-
-  bool getValue(int row, int column){
-    return widget.values[row][column] == 1 ? true : false;
+  int getValue(int row, int column){
+    return widget.values[row][column];
   }
 }
