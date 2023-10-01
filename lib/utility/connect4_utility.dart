@@ -7,7 +7,6 @@ class Connect4Utility {
         if (values[i][j] != 0){
           result = checkNeighbours(values,i,j);
           if (result.isNotEmpty){
-            print(result);
             return result;
           }
         }

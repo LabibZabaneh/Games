@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 class Connect4Circle extends StatelessWidget {
   final int value;
   final int column;
+  final bool gameOver;
   final Function(int column) move;
 
-  Connect4Circle({super.key, required this.column, required this.move, required this.value});
+  Connect4Circle({super.key, required this.column, required this.move, required this.value, required this.gameOver});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        move(column);
+        if (!gameOver){
+          move(column);
+        }
       },
       child: Container(
         width: 45,

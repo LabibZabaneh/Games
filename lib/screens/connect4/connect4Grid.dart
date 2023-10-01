@@ -8,15 +8,20 @@ import 'package:games/utility/connect4_utility.dart';
 class Connect4Grid extends StatefulWidget {
   List<List<int>> values = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
   bool turn = true;
-  String displayText = "Player 1 to play";
+  bool gameOver = false;
+  String displayText = "Blue to play";
+  int Function(bool) getPlayerScore;
+  Function(bool) changeScore;
+  Function changeScoreTurn;
   
-  Connect4Grid({super.key});
+  Connect4Grid({super.key, required this.getPlayerScore, required this.changeScore, required this.changeScoreTurn});
 
   @override
   State<Connect4Grid> createState() => _Connect4GridState();
 }
 
 class _Connect4GridState extends State<Connect4Grid> {
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,9 +29,9 @@ class _Connect4GridState extends State<Connect4Grid> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            DisplayScore(player: "Player 1", score: 0),
-            DisplayText(text: widget.displayText, gameOver: false, draw: false),
-            DisplayScore(player: "Player 2", score: 0)
+            DisplayScore(player: "Player 1", score: widget.getPlayerScore(true)),
+            DisplayText(text: widget.displayText, gameOver: widget.gameOver, draw: false),
+            DisplayScore(player: "Player 2", score: widget.getPlayerScore(false))
           ],
         ),
         rowOfCircles(0),
@@ -52,7 +57,7 @@ class _Connect4GridState extends State<Connect4Grid> {
   }
 
   Widget renderCircle(int row, int column){
-    return Connect4Circle(column: column, move: move, value: getValue(row, column));
+    return Connect4Circle(column: column, move: move, value: getValue(row, column), gameOver: widget.gameOver);
   }
 
   void move(int column){
@@ -67,7 +72,9 @@ class _Connect4GridState extends State<Connect4Grid> {
       List<List<int>> winValues = Connect4Utility.checkGameOver(widget.values);
       if (winValues.isNotEmpty){
         setWinValues(winValues);
-        print("GameOver");
+        widget.gameOver = true;
+        widget.changeScore(widget.turn);
+        widget.changeScoreTurn();
       }
     });
   }
@@ -78,6 +85,7 @@ class _Connect4GridState extends State<Connect4Grid> {
       int column = winValues[i][1];
       widget.values[row][column] = 3;
     }
+    changeDisplayText();
   }
 
   void changeTurn(){
@@ -86,10 +94,10 @@ class _Connect4GridState extends State<Connect4Grid> {
   }
 
   void changeDisplayText(){
-    if (widget.turn){
-      widget.displayText = "Player 1 to play";
+    if (widget.gameOver) {
+      widget.turn ? widget.displayText = "Yellow Wins!" : widget.displayText = "Blue Wins!";
     } else {
-      widget.displayText = "PLayer 2 to play";
+      widget.turn ? widget.displayText = "Blue to Play" : widget.displayText = "Yellow to Play";
     }
   }
 
