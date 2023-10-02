@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  final Function(bool) clickGameType;
+  final Function(bool, bool) clickGameType;
+  final bool gameType;
 
-  const Login({super.key, required this.clickGameType});
+  const Login({super.key, required this.clickGameType, required this.gameType});
 
   @override
   State<Login> createState() => _LoginState();
@@ -32,7 +33,7 @@ class _LoginState extends State<Login> {
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
-              widget.clickGameType(true);
+              widget.clickGameType(true, widget.gameType);
             },
             child: Container(
               margin: const EdgeInsets.only(top: 50),
@@ -49,7 +50,7 @@ class _LoginState extends State<Login> {
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
-              widget.clickGameType(false);
+              widget.clickGameType(false, widget.gameType);
             },
             child: Container(
               margin: const EdgeInsets.only(top: 20),

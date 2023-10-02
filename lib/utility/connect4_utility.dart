@@ -1,6 +1,6 @@
 class Connect4Utility {
 
-  static List<List<int>> checkGameOver(List<List<int>> values){
+  static List<List<int>> checkGameOver(List<List<int>> values){  // returns [] if game not over, and the winning cells if game over
     List<List<int>> result = [];
     for (int i=0;i<values.length;i++){
       for (int j=0;j<values[0].length;j++){

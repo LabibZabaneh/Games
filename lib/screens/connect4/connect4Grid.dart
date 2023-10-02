@@ -62,7 +62,7 @@ class _Connect4GridState extends State<Connect4Grid> {
 
   void move(int column){
     setState(() {
-      for (int i=4;i>=0;i--){
+      for (int i=4;i>=0;i--){ // choose the lowest available cell
         if (widget.values[i][column] == 0){
           widget.turn ? widget.values[i][column] = 1 : widget.values[i][column] = 2;
           changeTurn();
@@ -73,6 +73,7 @@ class _Connect4GridState extends State<Connect4Grid> {
       if (winValues.isNotEmpty){
         setWinValues(winValues);
         widget.gameOver = true;
+        changeDisplayText();
         widget.changeScore(widget.turn);
         widget.changeScoreTurn();
       }
@@ -90,7 +91,6 @@ class _Connect4GridState extends State<Connect4Grid> {
 
   void changeTurn(){
     widget.turn = !widget.turn;
-    changeDisplayText();
   }
 
   void changeDisplayText(){

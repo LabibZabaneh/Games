@@ -27,7 +27,7 @@ class _GameSelectionPageState extends State<GameSelectionPage> {
             )
         ),
         option("Tic Tac Toe", "tictactoeModePage"),
-        option("Connect 4", "connect4GamePage")
+        option("Connect 4", "connect4ModePage")
       ],
     );
   }
