@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Difficulty extends StatefulWidget {
-  final Function(int) clickDifficultyLevel;
+  final Function(int, bool) clickDifficultyLevel;
+  final bool gameType;
 
-  const Difficulty({super.key, required this.clickDifficultyLevel});
+  const Difficulty({super.key, required this.clickDifficultyLevel, required this.gameType});
 
   @override
   State<Difficulty> createState() => _DifficultyState();
@@ -30,7 +31,7 @@ class _DifficultyState extends State<Difficulty> {
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
-              widget.clickDifficultyLevel(1);
+              widget.clickDifficultyLevel(1, widget.gameType);
             },
             child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 5),
@@ -47,7 +48,7 @@ class _DifficultyState extends State<Difficulty> {
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
-              widget.clickDifficultyLevel(2);
+              widget.clickDifficultyLevel(2, widget.gameType);
             },
             child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 5),
@@ -64,7 +65,7 @@ class _DifficultyState extends State<Difficulty> {
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
-              widget.clickDifficultyLevel(3);
+              widget.clickDifficultyLevel(3, widget.gameType);
             },
             child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 5),

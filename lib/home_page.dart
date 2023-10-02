@@ -101,7 +101,9 @@ class _HomePageState extends State<HomePage> {
     } else if (name == "connect4ModePage"){
       return Login(clickGameType: clickGameType, gameType: false,);
     } else if (name == "tictactoeDifficultyPage"){
-      return Difficulty(clickDifficultyLevel: clickDifficultyLevel);
+      return Difficulty(clickDifficultyLevel: clickDifficultyLevel, gameType: true);
+    } else if (name == "connect4DifficultyPage"){
+      return Difficulty(clickDifficultyLevel: clickDifficultyLevel, gameType: false);
     } else if (name == "tictactoeGamePage"){
       return Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
           getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty);
@@ -157,9 +159,9 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void clickDifficultyLevel(int i){
+  void clickDifficultyLevel(int i, bool gameType){
     difficulty = i;
-    changePage("tictactoeGamePage");
+    gameType ? changePage("tictactoeGamePage") : changePage("connect4gamePage") ;
   }
 
 
@@ -168,7 +170,7 @@ class _HomePageState extends State<HomePage> {
     if (gameType){
       gameMode ? changePage("tictactoeDifficultyPage") : changePage("tictactoeGamePage");
     } else {
-      gameMode ? changePage("connect4GamePage") : changePage("connect4GamePage");
+      gameMode ? changePage("connect4DifficultyPage") : changePage("connect4GamePage");
     }
   }
 
