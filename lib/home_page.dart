@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
     } else if (name == "connect4DifficultyPage"){
       return Difficulty(clickDifficultyLevel: clickDifficultyLevel, gameType: false);
     } else if (name == "tictactoeGamePage"){
-      return Grid(gameType: gameType,values: values, turn: turn, displayText: displayText, winValues: winValues,
+      return Grid(gameType: gameType, values: values, turn: turn, displayText: displayText, winValues: winValues,
           getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty);
     } else if (name == "connect4GamePage"){
       return Connect4Grid(getPlayerScore: getPlayerScore, changeScore: changeScore, changeScoreTurn: changeScoreTurn);
@@ -189,7 +189,8 @@ class _HomePageState extends State<HomePage> {
   void clickMenu(){
     changePage("startPage");
     scoreTurn = false;
+    player1Score = 0;
+    player2Score = 0;
     clear();
-
   }
 }

@@ -8,6 +8,7 @@ import 'package:games/utility/connect4_utility.dart';
 class Connect4Grid extends StatefulWidget {
   List<List<int>> values = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
   bool turn = true;
+  bool draw = false;
   bool gameOver = false;
   String displayText = "Blue to play";
   int Function(bool) getPlayerScore;
@@ -65,7 +66,6 @@ class _Connect4GridState extends State<Connect4Grid> {
       for (int i=4;i>=0;i--){ // choose the lowest available cell
         if (widget.values[i][column] == 0){
           widget.turn ? widget.values[i][column] = 1 : widget.values[i][column] = 2;
-          changeTurn();
           break;
         }
       }
@@ -73,10 +73,14 @@ class _Connect4GridState extends State<Connect4Grid> {
       if (winValues.isNotEmpty){
         setWinValues(winValues);
         widget.gameOver = true;
-        changeDisplayText();
-        widget.changeScore(widget.turn);
+        widget.changeScore(!widget.turn);
         widget.changeScoreTurn();
       }
+      if (Connect4Utility.checkDraw(widget.values)){
+        widget.draw = true;
+      }
+      changeTurn();
+      changeDisplayText();
     });
   }
 
@@ -86,7 +90,6 @@ class _Connect4GridState extends State<Connect4Grid> {
       int column = winValues[i][1];
       widget.values[row][column] = 3;
     }
-    changeDisplayText();
   }
 
   void changeTurn(){
@@ -95,7 +98,7 @@ class _Connect4GridState extends State<Connect4Grid> {
 
   void changeDisplayText(){
     if (widget.gameOver) {
-      widget.turn ? widget.displayText = "Yellow Wins!" : widget.displayText = "Blue Wins!";
+      (widget.turn ? widget.displayText = "Yellow Wins!" : widget.displayText = "Blue Wins!");
     } else {
       widget.turn ? widget.displayText = "Blue to Play" : widget.displayText = "Yellow to Play";
     }

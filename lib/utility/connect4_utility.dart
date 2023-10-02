@@ -15,6 +15,17 @@ class Connect4Utility {
     return result;
   }
 
+  static bool checkDraw(List<List<int>> values){
+    for (int i=0;i<values.length;i++) {
+      for (int j = 0; j < values[0].length; j++) {
+        if (values[i][j] == 0){
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   static List<List<int>> checkNeighbours(List<List<int>> value, int row, int column){
     if (checkHorizontal(value, row, column)){
       return [[row, column], [row, column+1], [row, column+2], [row, column+3]];
