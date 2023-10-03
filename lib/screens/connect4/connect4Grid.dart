@@ -6,7 +6,7 @@ import 'package:games/widgets/display_text.dart';
 import 'package:games/utility/connect4_utility.dart';
 
 class Connect4Grid extends StatefulWidget {
-  List<List<int>> values = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
+  List<List<int>> values = [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]];
   bool turn = true;
   bool draw = false;
   bool gameOver = false;
@@ -31,7 +31,7 @@ class _Connect4GridState extends State<Connect4Grid> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             DisplayScore(player: "Player 1", score: widget.getPlayerScore(true)),
-            DisplayText(text: widget.displayText, gameOver: widget.gameOver, draw: false),
+            DisplayText(text: widget.displayText, gameOver: widget.gameOver, draw: widget.draw),
             DisplayScore(player: "Player 2", score: widget.getPlayerScore(false))
           ],
         ),
@@ -78,6 +78,7 @@ class _Connect4GridState extends State<Connect4Grid> {
       }
       if (Connect4Utility.checkDraw(widget.values)){
         widget.draw = true;
+        widget.gameOver = true;
       }
       changeTurn();
       changeDisplayText();
@@ -98,7 +99,11 @@ class _Connect4GridState extends State<Connect4Grid> {
 
   void changeDisplayText(){
     if (widget.gameOver) {
-      (widget.turn ? widget.displayText = "Yellow Wins!" : widget.displayText = "Blue Wins!");
+      if (widget.draw){
+        widget.displayText = "Draw!";
+      } else {
+        widget.turn ? widget.displayText = "Yellow Wins!" : widget.displayText = "Blue Wins!";
+      }
     } else {
       widget.turn ? widget.displayText = "Blue to Play" : widget.displayText = "Yellow to Play";
     }
