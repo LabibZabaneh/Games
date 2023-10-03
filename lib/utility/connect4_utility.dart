@@ -34,7 +34,7 @@ class Connect4Utility {
     } else  if (checkDiagonal(value, row, column, true)){
       return [[row, column], [row+1, column+1], [row+2, column+2], [row+3, column+3]];
     } else  if (checkDiagonal(value, row, column, false)){
-      return [[row, column], [row+1, column-1], [row+2, column-2], [row+3, column-3]];
+      return [[row, column], [row-1, column-1], [row-2, column-2], [row-3, column-3]];
     }
     return [];
   }
@@ -83,14 +83,14 @@ class Connect4Utility {
         return false;
       }
     } else {
-      if (row > 1 || column < 1){
+      if (row < 3 || column < 3) {
         return false;
       }
     }
     int i = 1;
     int value = values[row][column];
     while (i < 4){
-      if (value == values[row+i][side ? column+i : column-i]){
+      if (value == values[side ? row+i : row-i][side ? column+i : column-i]){
         if (i == 3){
           return true;
         }
