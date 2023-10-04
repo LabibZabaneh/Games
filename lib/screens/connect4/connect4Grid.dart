@@ -28,6 +28,7 @@ class _Connect4GridState extends State<Connect4Grid> {
 
   @override
   Widget build(BuildContext context) {
+    makeComputerMove();
     return Column(
       children: [
         Row(
@@ -86,6 +87,27 @@ class _Connect4GridState extends State<Connect4Grid> {
       changeTurn();
       changeDisplayText();
     });
+  }
+
+  Future<void> makeComputerMove() async {
+    if (widget.gameType && !widget.gameOver){
+      if (!widget.turn){
+        await Future.delayed(const Duration(milliseconds: 300));
+        makeRandomMove();
+      }
+    }
+  }
+
+  void makeRandomMove(){
+    Random random = Random();
+    bool available = false;
+    while(!available){
+      int col = random.nextInt(5);
+      if (hasColumnSpace(col)){
+        move(col);
+        break;
+      }
+    }
   }
 
   void setWinValues(List<List<int>> winValues){
