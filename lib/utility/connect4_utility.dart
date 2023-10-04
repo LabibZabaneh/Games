@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Connect4Utility {
 
   static List<List<int>> checkGameOver(List<List<int>> values){  // returns [] if game not over, and the winning cells if game over

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:games/widgets/display_text.dart';
 import 'package:games/widgets/score_keeping.dart';
@@ -14,8 +16,9 @@ class Connect4Grid extends StatefulWidget {
   int Function(bool) getPlayerScore;
   Function(bool) changeScore;
   Function changeScoreTurn;
+  bool gameType;
   
-  Connect4Grid({super.key, required this.getPlayerScore, required this.changeScore, required this.changeScoreTurn});
+  Connect4Grid({super.key, required this.getPlayerScore, required this.changeScore, required this.changeScoreTurn, required this.gameType});
 
   @override
   State<Connect4Grid> createState() => _Connect4GridState();
@@ -112,4 +115,9 @@ class _Connect4GridState extends State<Connect4Grid> {
   int getValue(int row, int column){
     return widget.values[row][column];
   }
+
+  bool hasColumnSpace(int col){
+    return widget.values[0][col] == 0; // if first cell empty there is space
+  }
+
 }
