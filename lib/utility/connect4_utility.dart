@@ -6,7 +6,7 @@ class Connect4Utility {
       return false;
     }
     values = move(values, column, value);
-    if (checkGameOver(values) != []){
+    if (checkGameOver(values).isNotEmpty){
       return true;
     }
     return false;

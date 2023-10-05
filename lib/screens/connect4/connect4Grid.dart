@@ -103,6 +103,9 @@ class _Connect4GridState extends State<Connect4Grid> {
       if (Connect4Utility.doesMoveWin(widget.values, i, widget.turn ? 1 : 2)){
         move(i);
         return;
+      } else if (Connect4Utility.doesMoveWin(widget.values, i, widget.turn ? 2 : 1)){
+        move(i);
+        return;
       }
     }
     makeEasyMove();
