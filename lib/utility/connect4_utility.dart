@@ -60,10 +60,10 @@ class Connect4Utility {
       return [[row, column], [row, column+1], [row, column+2], [row, column+3]];
     } else  if (checkVertical(value, row, column)){
       return [[row, column], [row+1, column], [row+2, column], [row+3, column]];
-    } else  if (checkDiagonal(value, row, column, true)){
+    } else if (checkDiagonal(value, row, column, true)){
       return [[row, column], [row+1, column+1], [row+2, column+2], [row+3, column+3]];
-    } else  if (checkDiagonal(value, row, column, false)){
-      return [[row, column], [row-1, column-1], [row-2, column-2], [row-3, column-3]];
+    } else if (checkDiagonal(value, row, column, false)){
+      return [[row, column], [row+1, column-1], [row+2, column-2], [row+3, column-3]];
     }
     return [];
   }
@@ -112,14 +112,17 @@ class Connect4Utility {
         return false;
       }
     } else {
-      if (row < 3 || column < 3) {
+      if (row > 1 || column < 3) {
         return false;
       }
     }
     int i = 1;
     int value = values[row][column];
     while (i < 4){
-      if (value == values[side ? row+i : row-i][side ? column+i : column-i]){
+      if (!side){
+        print("A row: $row, col: $column");
+      }
+      if (value == values[row+i][side ? column+i : column-i]){
         if (i == 3){
           return true;
         }
