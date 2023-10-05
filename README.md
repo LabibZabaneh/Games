@@ -1,12 +1,20 @@
-# Tic Tac Toe Game
+# Tic Tac Toe and Connect Four Games
 
-This is a simple Tic Tac Toe game built using Flutter.
+This repository contains two classic board games, Tic Tac Toe and Connect Four, built using Flutter.
 
 ## Features
 
+### Tic Tac Toe
 - **Single Player and Multiplayer Modes:** Choose between playing against the computer or with a friend.
 - **Adjustable Difficulty Levels:** In single-player mode, you can select from three difficulty levels: Easy, Medium, and Hard.
 - **Clean and Intuitive User Interface:** The app provides a seamless and enjoyable user experience.
+
+### Connect Four
+- **Single Player and Multiplayer Modes:** Play against the computer or challenge a friend.
+- **Adjustable Difficulty Levels:** In single-player mode, you can choose from three difficulty levels: Easy, Medium, and Hard.
+- **Classic Gameplay:** Experience the popular game of Connect Four.
+- **Interactive Grid:** Make your moves by tapping on the columns.
+- **Victory Detection:** The app will indicate the winner or a draw.
 
 ## How to Run
 
@@ -18,8 +26,9 @@ Follow these steps to run the app on your local machine:
 4. Run the app: `flutter run`
 
 ## Usage
-
-- Launch the app and choose between single-player and multi-player modes.
+- Launch the app and choose between Tic-Tac-Toe and Connect 4
+- Then choose between single-player and multi-player modes.
 - In single-player mode, select the difficulty level before starting the game.
 - Make your moves by tapping on the grid cells.
 - The app will indicate the winner or a draw.
+
