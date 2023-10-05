@@ -93,12 +93,22 @@ class _Connect4GridState extends State<Connect4Grid> {
     if (widget.gameType && !widget.gameOver){
       if (!widget.turn){
         await Future.delayed(const Duration(milliseconds: 300));
-        makeRandomMove();
+        makeMediumMove();
       }
     }
   }
 
-  void makeRandomMove(){
+  void makeMediumMove(){
+    for (int i=0;i<5;i++){
+      if (Connect4Utility.doesMoveWin(widget.values, i, widget.turn ? 1 : 2)){
+        move(i);
+        return;
+      }
+    }
+    makeEasyMove();
+  }
+
+  void makeEasyMove(){
     Random random = Random();
     bool available = false;
     while(!available){

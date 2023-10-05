@@ -1,6 +1,33 @@
-import 'dart:math';
-
 class Connect4Utility {
+
+  static bool doesMoveWin(List<List<int>> gameValues, int column, int value){
+    List<List<int>> values = [for (var sublist in gameValues) [...sublist]]; // create a deep copy
+    if (!doesColumnHasSpace(values, column)){
+      return false;
+    }
+    values = move(values, column, value);
+    if (checkGameOver(values) != []){
+      return true;
+    }
+    return false;
+  }
+
+  static List<List<int>> move(List<List<int>> values, int column, int value){
+    for (int i=values[0].length-1;i>=0;i--){
+      if (values[i][column] == 0){
+        values[i][column] = value;
+        return values;
+      }
+    }
+    return [];
+  }
+
+  static bool doesColumnHasSpace(List<List<int>> values, int column){
+    if (values[0][column] == 0){
+      return true;
+    }
+    return false;
+  }
 
   static List<List<int>> checkGameOver(List<List<int>> values){  // returns [] if game not over, and the winning cells if game over
     List<List<int>> result = [];
