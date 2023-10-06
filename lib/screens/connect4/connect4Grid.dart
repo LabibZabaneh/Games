@@ -100,11 +100,14 @@ class _Connect4GridState extends State<Connect4Grid> {
 
   void makeMediumMove(){
     for (int i=0;i<5;i++){
-      if (Connect4Utility.doesMoveWin(widget.values, i, widget.turn ? 1 : 2)){
+      if (Connect4Utility.doesMoveWin(widget.values, i, widget.turn ? 1 : 2)){ // check if computer can win
         move(i);
         return;
-      } else if (Connect4Utility.doesMoveWin(widget.values, i, widget.turn ? 2 : 1)){
-        move(i);
+      }
+    }
+    for (int j=0;j<5;j++){
+      if (Connect4Utility.doesMoveWin(widget.values, j, widget.turn ? 2 : 1)){ // check if user can win (next move)
+        move(j);
         return;
       }
     }
