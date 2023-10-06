@@ -17,8 +17,10 @@ class Connect4Grid extends StatefulWidget {
   Function(bool) changeScore;
   Function changeScoreTurn;
   bool gameType;
+  int difficulty;
   
-  Connect4Grid({super.key, required this.getPlayerScore, required this.changeScore, required this.changeScoreTurn, required this.gameType});
+  Connect4Grid({super.key, required this.getPlayerScore, required this.changeScore, required this.changeScoreTurn,
+    required this.gameType, required this.difficulty});
 
   @override
   State<Connect4Grid> createState() => _Connect4GridState();
@@ -93,21 +95,31 @@ class _Connect4GridState extends State<Connect4Grid> {
     if (widget.gameType && !widget.gameOver){
       if (!widget.turn){
         await Future.delayed(const Duration(milliseconds: 300));
-        makeMediumMove();
+        if (widget.difficulty > 1){
+          makeMediumMove();
+        } else {
+          makeEasyMove();
+        }
       }
     }
   }
 
   void makeMediumMove(){
-    for (int i=0;i<5;i++){
+    for (int i=0;i<widget.values[0].length;i++){
       if (Connect4Utility.doesMoveWin(widget.values, i, widget.turn ? 1 : 2)){ // check if computer can win
         move(i);
         return;
       }
     }
-    for (int j=0;j<5;j++){
+    for (int j=0;j<widget.values[0].length;j++){
       if (Connect4Utility.doesMoveWin(widget.values, j, widget.turn ? 2 : 1)){ // check if user can win (next move)
         move(j);
+        return;
+      }
+    }
+    for (int z=0;z<widget.values[0].length;z++){
+      if (Connect4Utility.doesNextMoveWin(widget.values, z, widget.turn ? 1 : 2)){
+        move(z);
         return;
       }
     }

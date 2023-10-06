@@ -108,7 +108,8 @@ class _HomePageState extends State<HomePage> {
       return Grid(gameType: gameType, values: values, turn: turn, displayText: displayText, winValues: winValues,
           getPlayerScore: getPlayerScore, changeScoreTurn: changeScoreTurn, changeScore: changeScore, getScoreTurn: getScoreTurn, difficulty: difficulty);
     } else if (name == "connect4GamePage"){
-      return Connect4Grid(getPlayerScore: getPlayerScore, changeScore: changeScore, changeScoreTurn: changeScoreTurn, gameType: gameType,);
+      return Connect4Grid(getPlayerScore: getPlayerScore, changeScore: changeScore, changeScoreTurn: changeScoreTurn,
+        gameType: gameType, difficulty: difficulty,);
     } else{
       return Container();
     }

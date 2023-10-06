@@ -1,7 +1,21 @@
 class Connect4Utility {
 
-  static bool doesMoveWin(List<List<int>> gameValues, int column, int value){
-    List<List<int>> values = [for (var sublist in gameValues) [...sublist]]; // create a deep copy
+  static bool doesNextMoveWin(List<List<int>> gameValues, int column, int value){ // does the next (not current) move wins
+    List<List<int>> values = copy(gameValues);
+    if (!doesColumnHasSpace(values, column)){
+      return false;
+    }
+    values = move(values, column, value);
+    for (int i=0;i<values[0].length;i++){
+      if (doesMoveWin(values, i, value)){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static bool doesMoveWin(List<List<int>> gameValues, int column, int value){ // does the current move wins
+    List<List<int>> values = copy(gameValues);
     if (!doesColumnHasSpace(values, column)){
       return false;
     }
@@ -10,6 +24,10 @@ class Connect4Utility {
       return true;
     }
     return false;
+  }
+
+  static List<List<int>> copy(List<List<int>> list){
+    return [for (var sublist in  list) [...sublist]]; // returns a deep copy
   }
 
   static List<List<int>> move(List<List<int>> values, int column, int value){
@@ -119,9 +137,6 @@ class Connect4Utility {
     int i = 1;
     int value = values[row][column];
     while (i < 4){
-      if (!side){
-        print("A row: $row, col: $column");
-      }
       if (value == values[row+i][side ? column+i : column-i]){
         if (i == 3){
           return true;
