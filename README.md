@@ -23,7 +23,9 @@ Follow these steps to run the app on your local machine:
 1. Clone this repository: `git clone https://github.com/LabibZabaneh/Games.git`
 2. Navigate to the project directory: `cd tic-tac-toe`
 3. Install dependencies: `flutter pub get`
-4. Run the app: `flutter run`
+4. Open the directory in your favorite IDE
+5. Select an emmulator
+6. Run the app
 
 ## Usage
 - Launch the app and choose between Tic-Tac-Toe and Connect 4
