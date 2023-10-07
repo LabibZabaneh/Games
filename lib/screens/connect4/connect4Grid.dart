@@ -97,11 +97,16 @@ class _Connect4GridState extends State<Connect4Grid> {
         await Future.delayed(const Duration(milliseconds: 300));
         if (widget.difficulty > 1){
           makeMediumMove();
+          makeHardMove();
         } else {
           makeEasyMove();
         }
       }
     }
+  }
+
+  void makeHardMove(){
+    print(Connect4Utility.countPossibleWins(widget.values, widget.turn ? 2 : 1)); // a heuristic to evaluate the game state
   }
 
   void makeMediumMove(){

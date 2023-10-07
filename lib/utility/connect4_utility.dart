@@ -1,5 +1,55 @@
 class Connect4Utility {
 
+  static int potential(List<List<int>> gameValues, int column, int value){
+    List<List<int>> values = copy(gameValues);
+    if (!doesColumnHasSpace(values, column)){
+      return -1; // move not possible
+    }
+    values = move(values, column, value);
+    return countPossibleWins(values, value);
+  }
+
+  static int countPossibleWins(List<List<int>> values, int player){
+    int count = 0;
+    for (int row=0;row<values.length;row++){
+      for (int col=0;col<values[0].length;col++){
+        if (values[row][col] == player){
+          count += checkPossibleHorizontal(values, row, col, player);
+        }
+      }
+    }
+    return count;
+  }
+
+  static int checkPossibleHorizontal(List<List<int>> values, int row, int col, int player){
+    int result = 0;
+    if (col <= values[0].length-4){ // check right side
+      if (checkSide(values, row, col, player, true)){
+        result++;
+      }
+    }
+    if (col > 2){
+      if (checkSide(values, row, col, player, false)){
+        result++;
+      }
+    }
+    return result;
+  }
+
+  static bool checkSide(List<List<int>> values, int row, int col, int player, bool direction){
+    for (int i=1;i<4;i++){
+      print("Row: $row, Col: $col, I: $i");
+      if (values[row][direction ? col+i : col-i] == 0 || values[row][direction ? col+i : col-i] == player){ // if player or empty
+        if (i == 3){
+          return true;
+        }
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+
   static bool doesNextMoveWin(List<List<int>> gameValues, int column, int value){ // does the next (not current) move wins
     List<List<int>> values = copy(gameValues);
     if (!doesColumnHasSpace(values, column)){
