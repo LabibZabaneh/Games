@@ -1,24 +1,53 @@
 class Connect4Utility {
 
-  static int potential(List<List<int>> gameValues, int column, int value){
+  static int evaluateMove(List<List<int>> gameValues, int column, int player){
     List<List<int>> values = copy(gameValues);
     if (!doesColumnHasSpace(values, column)){
       return -1; // move not possible
     }
-    values = move(values, column, value);
-    return countPossibleWins(values, value);
+    values = move(values, column, player);
+    return countPossibleWins(values, player);
   }
 
   static int countPossibleWins(List<List<int>> values, int player){
     int count = 0;
     for (int row=0;row<values.length;row++){
       for (int col=0;col<values[0].length;col++){
-        if (values[row][col] == player){
-          count += checkPossibleHorizontal(values, row, col, player);
+        if (values[row][col] == player || values[row][col] == 0){
+          evaluateVertical(values, row, col, player) ? count++ : null;
+          evaluateHorizontal(values, row, col, player) ? count++ : null;
         }
       }
     }
     return count;
+  }
+
+  static bool evaluateHorizontal(List<List<int>> values, int row, int col, int player){
+    if (col > values[0].length-4){
+      return false;
+    }
+    return evaluateHelper(values, row, col, player, true);
+  }
+
+  static evaluateVertical(List<List<int>> values, int row, int col, int player){
+    if (row > values.length-4){
+      return false;
+    }
+    return evaluateHelper(values, row, col, player, false);
+  }
+
+  static bool evaluateHelper(List<List<int>> values, int row, int col, int player, bool direction){
+    int i = 1;
+    bool foundPlayer = false;
+    while (i < 4){
+      if (values[direction ? row : row+i][direction ? col+i : col] == player){
+        foundPlayer = true;
+      } else if (values[direction ? row : row+i][direction ? col+i : col] != 0){ // equals opposing player cell
+        return false;
+      }
+      i++;
+    }
+    return foundPlayer;
   }
 
   static int checkPossibleHorizontal(List<List<int>> values, int row, int col, int player){

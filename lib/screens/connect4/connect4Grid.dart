@@ -97,7 +97,7 @@ class _Connect4GridState extends State<Connect4Grid> {
         await Future.delayed(const Duration(milliseconds: 300));
         if (widget.difficulty > 1){
           makeMediumMove();
-          makeHardMove();
+
         } else {
           makeEasyMove();
         }
@@ -106,7 +106,17 @@ class _Connect4GridState extends State<Connect4Grid> {
   }
 
   void makeHardMove(){
-    print(Connect4Utility.countPossibleWins(widget.values, widget.turn ? 2 : 1)); // a heuristic to evaluate the game state
+    int bestMove = -1;
+    int bestMoveScore = -1;
+    for (int i=0;i<widget.values[0].length;i++){
+      int currentMoveScore = Connect4Utility.evaluateMove(widget.values, i, widget.turn ? 2 : 1 ); // a heuristic to evaluate the game state
+      if (currentMoveScore > bestMoveScore) {
+        bestMove = i;
+        bestMoveScore = currentMoveScore;
+        print("Best Move: $bestMove, Best Move Score: $bestMoveScore");
+      }
+    }
+    move(bestMove);
   }
 
   void makeMediumMove(){
@@ -128,7 +138,7 @@ class _Connect4GridState extends State<Connect4Grid> {
         return;
       }
     }
-    makeEasyMove();
+    makeHardMove();
   }
 
   void makeEasyMove(){
