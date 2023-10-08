@@ -14,8 +14,12 @@ class Connect4Utility {
     for (int row=0;row<values.length;row++){
       for (int col=0;col<values[0].length;col++){
         if (values[row][col] == player || values[row][col] == 0){
-          evaluateVertical(values, row, col, player) ? count++ : null;
-          evaluateHorizontal(values, row, col, player) ? count++ : null;
+          if (evaluateVertical(values, row, col, player)){
+            count++;
+          }
+          if (evaluateHorizontal(values, row, col, player)){
+            count++;
+          }
         }
       }
     }
@@ -29,7 +33,7 @@ class Connect4Utility {
     return evaluateHelper(values, row, col, player, true);
   }
 
-  static evaluateVertical(List<List<int>> values, int row, int col, int player){
+  static bool evaluateVertical(List<List<int>> values, int row, int col, int player){
     if (row > values.length-4){
       return false;
     }
