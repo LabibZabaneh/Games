@@ -18,13 +18,13 @@ class _DifficultyState extends State<Difficulty> {
         Align(
           alignment: Alignment.center,
           child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 30),
-              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.symmetric(vertical: 40),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(10)
+                borderRadius: BorderRadius.circular(20)
               ),
-              child: const Text("Choose a difficulty", style: TextStyle(fontSize: 16),)
+              child: const Text("Choose a difficulty", style: TextStyle(fontSize: 17),)
           ),
         ),
         MouseRegion(
@@ -38,7 +38,7 @@ class _DifficultyState extends State<Difficulty> {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)
+                    borderRadius: BorderRadius.circular(20)
                 ),
                 child: const Text("Easy")
             ),
@@ -55,7 +55,7 @@ class _DifficultyState extends State<Difficulty> {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)
+                    borderRadius: BorderRadius.circular(20)
                 ),
                 child: const Text("Medium")
             ),
@@ -72,7 +72,7 @@ class _DifficultyState extends State<Difficulty> {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)
+                    borderRadius: BorderRadius.circular(20)
                 ),
                 child: const Text("Hard")
             ),

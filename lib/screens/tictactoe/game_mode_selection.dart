@@ -21,12 +21,12 @@ class _LoginState extends State<Login> {
           alignment: Alignment.center,
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 40),
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(30)
+                borderRadius: BorderRadius.circular(20)
             ),
-            child: const Text("Welcome!", style: TextStyle(fontSize: 20)),
+            child: const Text("Welcome!", style: TextStyle(fontSize: 17)),
           ),
         ),
         MouseRegion(
@@ -36,11 +36,11 @@ class _LoginState extends State<Login> {
               widget.clickGameType(true, widget.gameType);
             },
             child: Container(
-              margin: const EdgeInsets.only(top: 50),
-              padding: const EdgeInsets.all(7),
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10)
+                  borderRadius: BorderRadius.circular(20)
               ),
               child: const Text("Single Player Mode"),
             ),
@@ -53,11 +53,11 @@ class _LoginState extends State<Login> {
               widget.clickGameType(false, widget.gameType);
             },
             child: Container(
-              margin: const EdgeInsets.only(top: 20),
-              padding: const EdgeInsets.all(7),
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10)
+                  borderRadius: BorderRadius.circular(20)
               ),
               child: const Text(" Multi Player Mode "),
             ),
