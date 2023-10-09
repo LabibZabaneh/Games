@@ -29,41 +29,31 @@ class _LoginState extends State<Login> {
             child: const Text("Welcome!", style: TextStyle(fontSize: 17)),
           ),
         ),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () {
-              widget.clickGameType(true, widget.gameType);
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20)
-              ),
-              child: const Text("Single Player Mode"),
-            ),
-          ),
-        ),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () {
-              widget.clickGameType(false, widget.gameType);
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20)
-              ),
-              child: const Text(" Multi Player Mode "),
-            ),
-          ),
-        )
+        option("Single Player Mode", true),
+        option("Multi Player Mode", false)
       ],
+    );
+  }
+
+  Widget option(String text, bool option){
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          widget.clickGameType(option, widget.gameType);
+        },
+        child: Container(
+          width: 140,
+          alignment: Alignment.center,
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20)
+          ),
+          child: Text(text),
+        ),
+      ),
     );
   }
 }

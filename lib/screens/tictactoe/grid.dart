@@ -4,7 +4,7 @@ import 'dart:async';
 import '../../widgets/tictactoeBox.dart';
 import '../../widgets/display_text.dart';
 import '../../widgets/score_keeping.dart';
-import '../../utility/computer.dart';
+import '../../utility/tictactoe_utility.dart';
 
 class Grid extends StatefulWidget {
   bool gameType;

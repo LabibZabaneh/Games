@@ -27,58 +27,30 @@ class _DifficultyState extends State<Difficulty> {
               child: const Text("Choose a difficulty", style: TextStyle(fontSize: 17),)
           ),
         ),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () {
-              widget.clickDifficultyLevel(1, widget.gameType);
-            },
-            child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 5),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)
-                ),
-                child: const Text("Easy")
-            ),
-          ),
-        ),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () {
-              widget.clickDifficultyLevel(2, widget.gameType);
-            },
-            child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 5),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)
-                ),
-                child: const Text("Medium")
-            ),
-          ),
-        ),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () {
-              widget.clickDifficultyLevel(3, widget.gameType);
-            },
-            child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 5),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)
-                ),
-                child: const Text("Hard")
-            ),
-          ),
-        ),
+        option("Easy", 1),
+        option("Medium", 2),
+        option("Hard", 3),
       ],
+    );
+  }
+
+  Widget option(String text, int difficulty){
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          widget.clickDifficultyLevel(difficulty, widget.gameType);
+        },
+        child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20)
+            ),
+            child: Text(text)
+        ),
+      ),
     );
   }
 }
