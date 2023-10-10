@@ -111,8 +111,10 @@ class _Connect4GridState extends State<Connect4Grid> {
     for (int i=0;i<widget.values[0].length;i++){
       int currentMoveScore = Connect4Utility.evaluateMove(widget.values, i, widget.turn ? 1 : 2 ); // a heuristic to evaluate the game state
       if (currentMoveScore > bestMoveScore) {
-        bestMove = i;
-        bestMoveScore = currentMoveScore;
+        if (!Connect4Utility.doesNextMoveLose(widget.values, i, widget.turn ? 1 : 2 )){ // if i play this move, will i lose on the next move
+          bestMove = i;
+          bestMoveScore = currentMoveScore;
+        }
       }
     }
     move(bestMove);

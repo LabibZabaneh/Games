@@ -165,7 +165,6 @@ class _HomePageState extends State<HomePage> {
     gameType ? changePage("tictactoeGamePage") : changePage("connect4GamePage") ;
   }
 
-
   void clickGameType(bool gameMode, bool gameType){
     this.gameType = gameMode;
     if (gameType){

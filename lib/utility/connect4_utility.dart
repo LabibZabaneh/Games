@@ -97,6 +97,20 @@ class Connect4Utility {
     return false;
   }
 
+  static doesNextMoveLose(List<List<int>> gameValues, int column, int value){
+    List<List<int>> values = copy(gameValues);
+    if (!doesColumnHasSpace(values, column)){
+      return false;
+    }
+    values = move(values, column, value);
+    for (int i=0;i<values[0].length;i++){
+      if (doesMoveWin(values, i, value==1 ? value=2 : value=1)){
+        return true;
+      }
+    }
+    return false;
+  }
+
   static bool doesMoveWin(List<List<int>> gameValues, int column, int value){ // does the current move wins
     List<List<int>> values = copy(gameValues);
     if (!doesColumnHasSpace(values, column)){
